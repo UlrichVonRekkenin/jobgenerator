@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Расположить буквы в словах в случайном порядке {% endblock %}</h1>
+
+<form method="post" action="/random_letters">
+    <label for="variants">Количество вариантов (3-100):</label>
+    <input type="number" id="variants" name="variants" min="3" max="100" value="{{ request.form['variants'] }}">
+
+    <label for="partition">Взять не менее # слов:</label>
+    <input type="number" id="partition" name="partition" min="0" placeholder="0 - взять всё" value="{{ request.form['partition'] }}">
+
+    <input type="submit" value="Сгенерировать" name="generate" />
+
+    <textarea name="input" cols="100" rows="15" placeholder="Введите слова здесь">{{ request.form['input'] }}</textarea>
+    <textarea name="output" cols="100" rows="15">{{ output }}</textarea>
+</form>
+
+{% endblock %}
