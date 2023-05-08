@@ -3,17 +3,54 @@
 {% block content %}
 <h1>{% block title %} Добро пожаловать в генератор заданий {% endblock %}</h1>
 
+<form method="post" action="/">
 
-<ol>
-    <li><a href="{{ url_for('random_letters')}}">Расположить буквы в словах в случайном порядке</a></li>
-    <li><a href="{{ url_for('index')}}">Заменить часть букв нижним подчеркиванием</a></h2>
-    <li><a href="{{ url_for('index')}}">Пропустить определенные буквы в слове</a></h2>
-    <li><a href="{{ url_for('index')}}">Сопоставить слова</a></h2>
-    <li><a href="{{ url_for('index')}}">Расположить слова в предложении в случайном порядке</a></h2>
-    <li><a href="{{ url_for('index')}}">Расположить предложения в случайном порядке</a></h2>
-    <li><a href="{{ url_for('index')}}">Выбрать глаголы из списка</a></h2>
-    <li><a href="{{ url_for('index')}}">Пропустить слова в предложении</a></h2>
-</ol>
+    <p>
+        <select name="task_type">
+            <option disabled>Выберите вариант задания</option>
+            <option value="1">1. Расположить буквы в словах в случайном порядке</option>
+            <option value="2">2. Заменить часть букв нижним подчеркиванием</option>
+            <option value="3">3. Пропустить определенные буквы в слове</option>
+            <option value="4">4. Сопоставить слова</option>
+            <option value="5">5. Выбрать глаголы из списка</option>
+            <option value="6">6. Пропустить слова в предложении</option>
+        </select>
+    </p>
 
+    <p>
+        <label for="variants">Количество вариантов (3-100):</label>
+        <input type="number" id="variants" name="variants" min="3" max="100" value="{{ request.form['variants'] }}">
+    </p>
+
+    <p>
+        <label for="partition">Взять не менее # слов:</label>
+        <input type="number" id="partition" name="partition" min="0" placeholder="0 - взять всё"
+            value="{{ request.form['partition'] }}">
+    </p>
+
+    <p>
+        <label for="percentage">Процент заполнения:</label>
+        <input type="number" id="percentage" placeholder="По умолчанию: 10%" name="percentage" min="10" max="90"
+            step="10" value="{{ request.form['percentage'] }}">
+    </p>
+
+    <p>
+        <label for="characters">Пропустить символы</label>
+        <input type="text" id="characters" name="characters" value="{{ request.form['characters'] }}">
+    </p>
+
+    <p>
+        <label for="omit_words">Пропустить слова (перечислять через запятую)</label>
+        <input type="text" id="omit_words" name="omit_word" value="{{ request.form['omit_word'] }}">
+    </p>
+
+    <p><input type="submit" value="Сгенерировать" name="generate" /></p>
+
+    <p>
+        <textarea name="input" cols="100" rows="15"
+            placeholder="Введите слова здесь">{{ request.form['input'] }}</textarea>
+        <textarea name="output" cols="100" rows="10">{{ output }}</textarea>
+    </p>
+</form>
 
 {% endblock %}
