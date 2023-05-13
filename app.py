@@ -47,8 +47,11 @@ def match_words(lines):
     random.shuffle(col1)
     random.shuffle(col2)
 
+    def result(col):
+        return '\n'.join([f'{i}) {j}' for (i, j) in enumerate(col, start=1)])
+
     if len(col1) == len(col2):
-        return '\n'.join([f'{i} {j}' for (i, j) in zip(col1, col2)])
+        return f"{result(col1)}\n{result(col2)}"
 
     return '\n'.join(col1)
 
@@ -86,11 +89,14 @@ def omitted_word(sentences, omit_word):
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
+    def default(field, value):
+        return int(field) if len(field) else value
+
     if request.method == 'POST':
-        nums = int(request.form['variants'])
-        partition = int(request.form['partition']) if len(
-            request.form['partition']) else 0
-        percentage = int(request.form['percentage'])
+
+        nums = default(request.form['variants'], 3)
+        partition = default(request.form['partition'], 0)
+        percentage = default(request.form['percentage'], 10)
         chars = set(request.form['characters'])
         omit_word = [word.strip()
                      for word in request.form['omit_word'].split(',')]

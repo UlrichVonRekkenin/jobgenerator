@@ -4,3 +4,10 @@ h1 {
     text-align: center;
     padding: 10px;
 }
+button {
+	color: #fff;
+	background-color: #29c5e6;
+	border: none;
+	height: 32px;
+	font-family: 'Oswald', sans-serif;
+}

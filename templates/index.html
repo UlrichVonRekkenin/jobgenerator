@@ -5,7 +5,7 @@
 
 <form method="post" action="/">
 
-    <p>
+    <div>
         <select name="task_type">
             <option disabled>Выберите вариант задания</option>
             <option value="1">1. Расположить буквы в словах в случайном порядке</option>
@@ -15,42 +15,45 @@
             <option value="5">5. Выбрать глаголы из списка</option>
             <option value="6">6. Пропустить слова в предложении</option>
         </select>
-    </p>
+    </div>
 
-    <p>
+    <div>
         <label for="variants">Количество вариантов (3-100):</label>
-        <input type="number" id="variants" name="variants" min="3" max="100" value="{{ request.form['variants'] }}">
-    </p>
+        <input type="number" id="variants" name="variants" min="3" max="100" placeholder="По умолчанию 3"
+            value="{{ request.form['variants'] }}">
+    </div>
 
-    <p>
+    <div>
         <label for="partition">Взять не менее # слов:</label>
         <input type="number" id="partition" name="partition" min="0" placeholder="0 - взять всё"
             value="{{ request.form['partition'] }}">
-    </p>
+    </div>
 
-    <p>
+    <div>
         <label for="percentage">Процент заполнения:</label>
         <input type="number" id="percentage" placeholder="По умолчанию: 10%" name="percentage" min="10" max="90"
             step="10" value="{{ request.form['percentage'] }}">
-    </p>
+    </div>
 
-    <p>
+    <div>
         <label for="characters">Пропустить символы</label>
         <input type="text" id="characters" name="characters" value="{{ request.form['characters'] }}">
-    </p>
+    </div>
 
-    <p>
+    <div>
         <label for="omit_words">Пропустить слова (перечислять через запятую)</label>
         <input type="text" id="omit_words" name="omit_word" value="{{ request.form['omit_word'] }}">
-    </p>
+    </div>
 
-    <p><input type="submit" value="Сгенерировать" name="generate" /></p>
+    <div>
+        <input type="submit" value="Сгенерировать" name="generate" />
+    </div>
 
-    <p>
-        <textarea name="input" cols="100" rows="15"
+    <div>
+        <textarea name="input" cols="100" rows="15" required="true" autocomplete="on" spellcheck="true"
             placeholder="Введите слова здесь">{{ request.form['input'] }}</textarea>
-        <textarea name="output" cols="100" rows="10">{{ output }}</textarea>
-    </p>
+        <textarea name="output" cols="100" rows="10" readonly="true">{{ output }}</textarea>
+    </div>
 </form>
 
 {% endblock %}
