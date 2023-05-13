@@ -1,3 +1,6 @@
 .venv
-
+build
+dist
+*.7z
+*.spec
 __pycache__

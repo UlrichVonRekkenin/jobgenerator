@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request
 import random
 import re
+import webview
 
 
 app = Flask(__name__)
-
+window = webview.create_window("Job Generator", app)
 
 def words_shuffle(words):
     def word_shuffle(word):
@@ -124,3 +125,7 @@ def index():
         return render_template("index.html", variants=nums, input=request.form['input'], partition=partition, output=result)
     elif request.method == 'GET':
         return render_template('index.html')
+
+
+if __name__ == '__main__':
+    webview.start()
