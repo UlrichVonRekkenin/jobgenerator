@@ -2,3 +2,4 @@ Flask==2.3.2
 flask_flatpages
 Frozen-Flask
 cx_Freeze==6.14.9
+pywebview==4.1
